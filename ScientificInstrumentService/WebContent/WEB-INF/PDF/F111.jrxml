@@ -1,0 +1,2550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="F111" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd471393-14e4-4528-ad64-6fa1b5736874">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1784"/>
+	<subDataset name="dataset1" uuid="df192041-d5ec-4854-b408-a0ca33722991">
+		<parameter name="testAnalysisFrom" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     testitem.`testitem_ID` AS testitem_testitem_ID,
+     testitem.`experiment` AS testitem_experiment,
+     testitem.`min_qty_samples` AS testitem_min_qty_samples,
+     testitem.`priceType_A` AS testitem_priceType_A,
+     testitem.`priceType_B` AS testitem_priceType_B,
+     testitem.`priceType_C` AS testitem_priceType_C,
+     testitem.`priceType_D` AS testitem_priceType_D,
+     testitem.`testitem_Name` AS testitem_testitem_Name,
+     testitem.`typetestitem_ID` AS testitem_typetestitem_ID,
+     testitem.`nextprice` AS testitem_nextprice,
+     usetestitem.`usetestitemID` AS usetestitem_usetestitemID,
+     usetestitem.`sampleName` AS usetestitem_sampleName,
+     usetestitem.`code` AS usetestitem_code,
+     usetestitem.`weight` AS usetestitem_weight,
+     usetestitem.`qty` AS usetestitem_qty,
+     usetestitem.`articleNo` AS usetestitem_articleNo,
+     usetestitem.`number_Operating` AS usetestitem_number_Operating,
+     usetestitem.`storage` AS usetestitem_storage,
+     usetestitem.`maintenancefee` AS usetestitem_maintenancefee,
+     usetestitem.`testItem_testitem_ID` AS usetestitem_testItem_testitem_ID,
+     usetestitem.`testAnalysisForm_testAnalysisFormNumber` AS usetestitem_testAnalysisForm_testAnalysisFormNumber,
+     typetestitem.`typetestitem_ID` AS typetestitem_typetestitem_ID,
+     typetestitem.`typetestitem_Name` AS typetestitem_typetestitem_Name
+FROM
+     `testitem` testitem INNER JOIN `usetestitem` usetestitem ON testitem.`testitem_ID` = usetestitem.`testItem_testitem_ID`
+     INNER JOIN `typetestitem` typetestitem ON testitem.`typetestitem_ID` = typetestitem.`typetestitem_ID`
+WHERE
+usetestitem.`testAnalysisForm_testAnalysisFormNumber` = $P{testAnalysisFrom}]]>
+		</queryString>
+		<field name="testitem_testitem_ID" class="java.lang.String"/>
+		<field name="testitem_experiment" class="java.lang.String"/>
+		<field name="testitem_min_qty_samples" class="java.lang.String"/>
+		<field name="testitem_priceType_A" class="java.lang.Double"/>
+		<field name="testitem_priceType_B" class="java.lang.Double"/>
+		<field name="testitem_priceType_C" class="java.lang.Double"/>
+		<field name="testitem_priceType_D" class="java.lang.Double"/>
+		<field name="testitem_testitem_Name" class="java.lang.String"/>
+		<field name="testitem_typetestitem_ID" class="java.lang.String"/>
+		<field name="testitem_nextprice" class="java.lang.Double"/>
+		<field name="usetestitem_usetestitemID" class="java.lang.String"/>
+		<field name="usetestitem_sampleName" class="java.lang.String"/>
+		<field name="usetestitem_code" class="java.lang.String"/>
+		<field name="usetestitem_weight" class="java.lang.String"/>
+		<field name="usetestitem_qty" class="java.lang.Integer"/>
+		<field name="usetestitem_articleNo" class="java.lang.String"/>
+		<field name="usetestitem_number_Operating" class="java.lang.String"/>
+		<field name="usetestitem_storage" class="java.lang.String"/>
+		<field name="usetestitem_maintenancefee" class="java.lang.Double"/>
+		<field name="usetestitem_testItem_testitem_ID" class="java.lang.String"/>
+		<field name="usetestitem_testAnalysisForm_testAnalysisFormNumber" class="java.lang.String"/>
+		<field name="typetestitem_typetestitem_ID" class="java.lang.String"/>
+		<field name="typetestitem_typetestitem_Name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="approveNo1" uuid="70a99b6b-9a60-441f-aa76-68a8bc62bb61">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     CONCAT(personnel.`personnel_Prefix`,personnel.`personnel_FirstName`,' ',personnel.`personnel_LastName`) AS personnel_name,
+     personnel.`email` AS personnel_email,
+     personnel.`personnel_type` AS personnel_personnel_type,
+     personnel.`position` AS personnel_position,
+     approvaltestanalysisform.`status` AS approvaltestanalysisform_status,
+     approvaltestanalysisform.`reason` AS approvaltestanalysisform_reason,
+     approvaltestanalysisform.`date_approve` AS approvaltestanalysisform_date_approve
+FROM
+     `approvaltestanalysisform` approvaltestanalysisform LEFT JOIN `personnel` personnel ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber` = $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 1]]>
+		</queryString>
+		<field name="personnel_name" class="java.lang.String"/>
+		<field name="personnel_email" class="java.lang.String"/>
+		<field name="personnel_personnel_type" class="java.lang.String"/>
+		<field name="personnel_position" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_status" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_reason" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_date_approve" class="java.sql.Timestamp"/>
+	</subDataset>
+	<subDataset name="approve2_approve" uuid="5f92009f-a554-48a8-a343-21cb5718e28e">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     approvaltestanalysisform.`status` AS approvaltestanalysisform_status,
+     approvaltestanalysisform.`reason` AS approvaltestanalysisform_reason
+FROM
+     `personnel` personnel INNER JOIN `approvaltestanalysisform` approvaltestanalysisform ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber` = $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 2
+LIMIT 1]]>
+		</queryString>
+		<field name="approvaltestanalysisform_status" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_reason" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="maintenanceFee" uuid="29dae6ec-ab70-467c-9157-de2dc47f2868">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     SUM(usetestitem.`maintenancefee`) AS maintainance_fee
+, COUNT(usetestitem.`maintenancefee`)  AS maintainance_fee_count
+FROM
+`usetestitem` usetestitem
+WHERE
+usetestitem.`testAnalysisForm_testAnalysisFormNumber` = $P{tafn}
+AND usetestitem.`maintenancefee` is not null
+AND usetestitem.`maintenancefee` > 0]]>
+		</queryString>
+		<field name="maintainance_fee" class="java.lang.Double"/>
+		<field name="maintainance_fee_count" class="java.lang.Long"/>
+	</subDataset>
+	<subDataset name="additional_cost" uuid="54d5a8e2-4cd6-4170-b70f-23ab862a0ae7">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     SUM(usetestitem.`maintenancefee`) AS maintainance_fee,
+     COUNT(usetestitem.`maintenancefee`) AS maintainance_fee_count
+FROM
+     `usetestitem` usetestitem
+WHERE
+     usetestitem.`testAnalysisForm_testAnalysisFormNumber` = $P{tafn}
+ AND usetestitem.`maintenancefee`! = null
+ AND usetestitem.`maintenancefee` > 0]]>
+		</queryString>
+	</subDataset>
+	<subDataset name="summary_price" uuid="e907e259-ea6b-4f63-a96e-fe4494ef1fcc">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     SUM(usetestitem.`maintenancefee`) AS maintainance_fee
+FROM
+`usetestitem` usetestitem
+WHERE
+usetestitem.`testAnalysisForm_testAnalysisFormNumber` = $P{tafn}
+AND usetestitem.`maintenancefee` is not null
+AND usetestitem.`maintenancefee` > 0]]>
+		</queryString>
+		<field name="maintainance_fee" class="java.lang.Double"/>
+	</subDataset>
+	<subDataset name="approve2_person" uuid="ad576914-6f38-4ffd-9dcf-f9bf13d5ad0f">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     CONCAT(personnel.`personnel_Prefix`,personnel.`personnel_FirstName`,' ',personnel.`personnel_LastName`) AS personnel_name,
+     approvaltestanalysisform.`date_approve` AS approvaltestanalysisform_date_approve
+FROM
+     `approvaltestanalysisform` approvaltestanalysisform LEFT JOIN `personnel` personnel ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber` = $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 2]]>
+		</queryString>
+		<field name="personnel_name" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_date_approve" class="java.sql.Timestamp"/>
+	</subDataset>
+	<subDataset name="approve3_person" uuid="fe7c75be-0cfe-4684-8493-bccbaf27316e">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     CONCAT(personnel.`personnel_Prefix`,personnel.`personnel_FirstName`,' ',personnel.`personnel_LastName`) AS personnel_name,
+     approvaltestanalysisform.`date_approve` AS approvaltestanalysisform_date_approve
+FROM
+`testanalysisform` testanalysisform LEFT JOIN `approvaltestanalysisform` approvaltestanalysisform on testanalysisform.`testAnalysisFormNumber` = approvaltestanalysisform.`testAnalysisFormNumber`
+     LEFT JOIN `personnel` personnel ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber` = $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 3]]>
+		</queryString>
+		<field name="personnel_name" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_date_approve" class="java.sql.Timestamp"/>
+	</subDataset>
+	<subDataset name="approve4_approve" uuid="6cba6700-eaed-4d47-9df2-85f21b8d7764">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     approvaltestanalysisform.`status` AS approvaltestanalysisform_status,
+     approvaltestanalysisform.`reason` AS approvaltestanalysisform_reason
+FROM
+     `approvaltestanalysisform` approvaltestanalysisform LEFT JOIN `personnel` personnel ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber` = $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 4
+LIMIT 1]]>
+		</queryString>
+		<field name="approvaltestanalysisform_status" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_reason" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="approve4_person" uuid="9ee1288a-d67b-47fb-9679-11f67f1e6818">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     CONCAT(personnel.`personnel_Prefix`,personnel.`personnel_FirstName`,' ',personnel.`personnel_LastName`) AS personnel_name,
+     approvaltestanalysisform.`date_approve` AS approvaltestanalysisform_date_approve
+FROM
+     `approvaltestanalysisform` approvaltestanalysisform LEFT JOIN `personnel` personnel ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber` = $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 4]]>
+		</queryString>
+		<field name="personnel_name" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_date_approve" class="java.sql.Timestamp"/>
+	</subDataset>
+	<subDataset name="approve5_approve" uuid="e20b2de2-b675-40f3-ab64-b850cbbf17b7">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     approvaltestanalysisform.`status` AS approvaltestanalysisform_status,
+     approvaltestanalysisform.`reason` AS approvaltestanalysisform_reason
+FROM
+     `personnel` personnel INNER JOIN `approvaltestanalysisform` approvaltestanalysisform ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber` = $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 5
+LIMIT 1]]>
+		</queryString>
+		<field name="approvaltestanalysisform_status" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_reason" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="approve5_person" uuid="3a49fa06-5cd8-4051-b686-e13698c50101">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     CONCAT(personnel.`personnel_Prefix`,personnel.`personnel_FirstName`,' ',personnel.`personnel_LastName`) AS personnel_name,
+     approvaltestanalysisform.`date_approve` AS approvaltestanalysisform_date_approve
+FROM
+     `approvaltestanalysisform` approvaltestanalysisform LEFT JOIN `personnel` personnel ON personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE
+     approvaltestanalysisform.`testAnalysisFormNumber`= $P{tafn}
+ AND approvaltestanalysisform.`approveNo` = 5]]>
+		</queryString>
+		<field name="personnel_name" class="java.lang.String"/>
+		<field name="approvaltestanalysisform_date_approve" class="java.sql.Timestamp"/>
+	</subDataset>
+	<subDataset name="payment_person" uuid="b02d1f96-e740-476f-8434-238d4e732f4c">
+		<parameter name="tafn" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     payment.`payment_ID` AS payment_payment_ID,
+     payment.`paymentDateTime` AS payment_paymentDateTime,
+     payment.`payment_type` AS payment_payment_type,
+     payment.`receipts_on_behalf` AS payment_receipts_on_behalf,
+     payment.`status` AS payment_status,
+     payment.`totalprice` AS payment_totalprice,
+     payment.`personnel_ID` AS payment_personnel_ID,
+     CONCAT(personnel.`personnel_Prefix`,personnel.`personnel_FirstName`,' ',personnel.`personnel_LastName`) AS full_name
+FROM
+     `testanalysisform` testanalysisform INNER JOIN
+     `payment` payment  ON payment.`payment_ID` = testanalysisform.`payment_ID`
+     LEFT JOIN `personnel` personnel ON payment.`personnel_ID` = personnel.`personnel_ID`
+     AND personnel.`personnel_ID` = testanalysisform.`personnel_ID`
+WHERE
+testanalysisform.`testAnalysisFormNumber` = $P{tafn}]]>
+		</queryString>
+		<field name="payment_payment_ID" class="java.lang.Integer"/>
+		<field name="payment_paymentDateTime" class="java.sql.Timestamp"/>
+		<field name="payment_payment_type" class="java.lang.String"/>
+		<field name="payment_receipts_on_behalf" class="java.lang.String"/>
+		<field name="payment_status" class="java.lang.String"/>
+		<field name="payment_totalprice" class="java.lang.Double"/>
+		<field name="payment_personnel_ID" class="java.lang.String"/>
+		<field name="full_name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="approve1_person" uuid="dcf122b2-9063-4a6c-bbd8-71223f00503d">
+		<parameter name="mem_id" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="student_id" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     student.`advisor_name` AS student_advisor_name
+FROM
+     `student` student
+WHERE
+student.`studentID` = $P{student_id};]]>
+		</queryString>
+		<field name="student_advisor_name" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="dataset2" uuid="b514b519-3f85-479b-9575-e1bed2fb8f9b">
+		<parameter name="mem" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     member.`advisor_name` AS member_advisor_name
+FROM
+     `member` member
+WHERE
+member.`member_ID` = $P{mem}]]>
+		</queryString>
+		<field name="member_advisor_name" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="testAnalysisFormNumber" class="java.lang.String"/>
+	<parameter name="image_path" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     testanalysisform.`testAnalysisFormNumber` AS testanalysisform_testAnalysisFormNumber,
+     testanalysisform.`type` AS testanalysisform_type,
+     testanalysisform.`pickupdate` AS testanalysisform_pickupdate,
+     testanalysisform.`language` AS testanalysisform_language,
+     testanalysisform.`client_name` AS testanalysisform_client_name,
+     testanalysisform.`address` AS testanalysisform_address,
+     testanalysisform.`report_Address` AS testanalysisform_report_Address,
+     testanalysisform.`billing_Address` AS testanalysisform_billing_Address,
+     testanalysisform.`packing_style` AS testanalysisform_packing_style,
+     testanalysisform.`additional_details` AS testanalysisform_additional_details,
+     testanalysisform.`receive_Analysis_Result` AS testanalysisform_receive_Analysis_Result,
+     testanalysisform.`resultsOfTheAnalysis` AS testanalysisform_resultsOfTheAnalysis,
+     testanalysisform.`approveLV` AS testanalysisform_approveLV,
+     testanalysisform.`createdate` AS testanalysisform_createdate,
+     testanalysisform.`member_ID` AS testanalysisform_member_ID,
+     testanalysisform.`payment_ID` AS testanalysisform_payment_ID,
+     testanalysisform.`testing_status` AS testanalysisform_testing_status,
+     testanalysisform.`approvestatus` AS testanalysisform_approvestatus,
+     testanalysisform.`studentID` AS testanalysisform_studentID,
+     testanalysisform.`personnel_ID` AS testanalysisform_personnel_ID,
+     student.`studentID` AS student_studentID,
+     student.`nameTh` AS student_nameTh,
+     student.`surnameTh` AS student_surnameTh,
+     student.`programNameTh` AS student_programNameTh,
+     student.`facultyNameTh` AS student_facultyNameTh,
+     student.`statusName` AS student_statusName,
+     student.`status` AS student_status,
+     student.`levelName` AS student_levelName,
+     student.`idcard` AS student_idcard,
+     student.`advisor_name` AS student_advisor_name,
+     student.`emailadvisor` AS student_emailadvisor,
+     student.`phonenumber` AS student_phonenumber,
+     student.`email` AS student_email,
+     member.`member_ID` AS member_member_ID,
+     member.`member_Prefix` AS member_member_Prefix,
+     member.`member_FirstName` AS member_member_FirstName,
+     member.`member_LastName` AS member_member_LastName,
+     member.`typeMember` AS member_typeMember,
+     member.`position` AS member_position,
+     member.`email` AS member_email,
+     member.`phonenumber` AS member_phonenumber,
+     member.`username` AS member_username,
+     member.`studentID` AS member_studentID,
+     member.`degree` AS member_degree,
+     member.`branch` AS member_branch,
+     member.`faculty` AS member_faculty,
+     member.`university` AS member_university,
+     member.`advisor_name` AS member_advisor_name,
+     member.`emailadvisor` AS member_emailadvisor,
+     member.`company_name` AS member_company_name,
+     personnel.`personnel_ID` AS personnel_personnel_ID,
+     personnel.`personnel_Prefix` AS personnel_personnel_Prefix,
+     personnel.`personnel_FirstName` AS personnel_personnel_FirstName,
+     personnel.`personnel_LastName` AS personnel_personnel_LastName,
+     personnel.`email` AS personnel_email,
+     personnel.`personnel_type` AS personnel_personnel_type,
+     personnel.`position` AS personnel_position,
+     payment.`payment_ID` AS payment_payment_ID,
+     payment.`paymentDateTime` AS payment_paymentDateTime,
+     payment.`payment_type` AS payment_payment_type,
+     payment.`receipts_on_behalf` AS payment_receipts_on_behalf,
+     payment.`status` AS payment_status,
+     payment.`totalprice` AS payment_totalprice,
+     approvaltestanalysisform.`approval_ID` AS approvaltestanalysisform_approval_ID,
+     approvaltestanalysisform.`approveNo` AS approvaltestanalysisform_approveNo,
+     approvaltestanalysisform.`date_approve` AS approvaltestanalysisform_date_approve,
+     approvaltestanalysisform.`reason` AS approvaltestanalysisform_reason,
+     approvaltestanalysisform.`status` AS approvaltestanalysisform_status,
+     approvaltestanalysisform.`personnel_ID` AS approvaltestanalysisform_personnel_ID,
+     approvaltestanalysisform.`testAnalysisFormNumber` AS approvaltestanalysisform_testAnalysisFormNumber,
+     approvaltestanalysisform.`emailadvosor` AS approvaltestanalysisform_emailadvosor
+FROM
+     `testanalysisform` testanalysisform LEFT JOIN `student` student  ON student.`studentID` = testanalysisform.`studentID`
+     LEFT JOIN `member` member ON testanalysisform.`member_ID` = member.`member_ID`
+     LEFT JOIN `personnel` personnel ON testanalysisform.`personnel_ID` = personnel.`personnel_ID`
+     INNER JOIN `payment` payment ON testanalysisform.`payment_ID` = payment.`payment_ID`
+     LEFT JOIN `approvaltestanalysisform` approvaltestanalysisform ON testanalysisform.`testAnalysisFormNumber` = approvaltestanalysisform.`testAnalysisFormNumber`
+     AND personnel.`personnel_ID` = approvaltestanalysisform.`personnel_ID`
+WHERE testanalysisform.`testAnalysisFormNumber` = $P{testAnalysisFormNumber}]]>
+	</queryString>
+	<field name="testanalysisform_testAnalysisFormNumber" class="java.lang.String"/>
+	<field name="testanalysisform_type" class="java.lang.String"/>
+	<field name="testanalysisform_pickupdate" class="java.sql.Date"/>
+	<field name="testanalysisform_language" class="java.lang.String"/>
+	<field name="testanalysisform_client_name" class="java.lang.String"/>
+	<field name="testanalysisform_address" class="java.lang.String"/>
+	<field name="testanalysisform_report_Address" class="java.lang.String"/>
+	<field name="testanalysisform_billing_Address" class="java.lang.String"/>
+	<field name="testanalysisform_packing_style" class="java.lang.String"/>
+	<field name="testanalysisform_additional_details" class="java.lang.String"/>
+	<field name="testanalysisform_receive_Analysis_Result" class="java.lang.String"/>
+	<field name="testanalysisform_resultsOfTheAnalysis" class="java.lang.String"/>
+	<field name="testanalysisform_approveLV" class="java.lang.Integer"/>
+	<field name="testanalysisform_createdate" class="java.sql.Timestamp"/>
+	<field name="testanalysisform_member_ID" class="java.lang.String"/>
+	<field name="testanalysisform_payment_ID" class="java.lang.Integer"/>
+	<field name="testanalysisform_testing_status" class="java.lang.String"/>
+	<field name="testanalysisform_approvestatus" class="java.lang.String"/>
+	<field name="testanalysisform_studentID" class="java.lang.String"/>
+	<field name="testanalysisform_personnel_ID" class="java.lang.String"/>
+	<field name="student_studentID" class="java.lang.String"/>
+	<field name="student_nameTh" class="java.lang.String"/>
+	<field name="student_surnameTh" class="java.lang.String"/>
+	<field name="student_programNameTh" class="java.lang.String"/>
+	<field name="student_facultyNameTh" class="java.lang.String"/>
+	<field name="student_statusName" class="java.lang.String"/>
+	<field name="student_status" class="java.lang.String"/>
+	<field name="student_levelName" class="java.lang.String"/>
+	<field name="student_idcard" class="java.lang.String"/>
+	<field name="student_advisor_name" class="java.lang.String"/>
+	<field name="student_emailadvisor" class="java.lang.String"/>
+	<field name="student_phonenumber" class="java.lang.String"/>
+	<field name="student_email" class="java.lang.String"/>
+	<field name="member_member_ID" class="java.lang.String"/>
+	<field name="member_member_Prefix" class="java.lang.String"/>
+	<field name="member_member_FirstName" class="java.lang.String"/>
+	<field name="member_member_LastName" class="java.lang.String"/>
+	<field name="member_typeMember" class="java.lang.String"/>
+	<field name="member_position" class="java.lang.String"/>
+	<field name="member_email" class="java.lang.String"/>
+	<field name="member_phonenumber" class="java.lang.String"/>
+	<field name="member_username" class="java.lang.String"/>
+	<field name="member_studentID" class="java.lang.String"/>
+	<field name="member_degree" class="java.lang.String"/>
+	<field name="member_branch" class="java.lang.String"/>
+	<field name="member_faculty" class="java.lang.String"/>
+	<field name="member_university" class="java.lang.String"/>
+	<field name="member_advisor_name" class="java.lang.String"/>
+	<field name="member_emailadvisor" class="java.lang.String"/>
+	<field name="member_company_name" class="java.lang.String"/>
+	<field name="personnel_personnel_ID" class="java.lang.String"/>
+	<field name="personnel_personnel_Prefix" class="java.lang.String"/>
+	<field name="personnel_personnel_FirstName" class="java.lang.String"/>
+	<field name="personnel_personnel_LastName" class="java.lang.String"/>
+	<field name="personnel_email" class="java.lang.String"/>
+	<field name="personnel_personnel_type" class="java.lang.String"/>
+	<field name="personnel_position" class="java.lang.String"/>
+	<field name="payment_payment_ID" class="java.lang.Integer"/>
+	<field name="payment_paymentDateTime" class="java.sql.Timestamp"/>
+	<field name="payment_payment_type" class="java.lang.String"/>
+	<field name="payment_receipts_on_behalf" class="java.lang.String"/>
+	<field name="payment_status" class="java.lang.String"/>
+	<field name="payment_totalprice" class="java.lang.Double"/>
+	<field name="approvaltestanalysisform_approval_ID" class="java.lang.Integer"/>
+	<field name="approvaltestanalysisform_approveNo" class="java.lang.Integer"/>
+	<field name="approvaltestanalysisform_date_approve" class="java.sql.Timestamp"/>
+	<field name="approvaltestanalysisform_reason" class="java.lang.String"/>
+	<field name="approvaltestanalysisform_status" class="java.lang.String"/>
+	<field name="approvaltestanalysisform_personnel_ID" class="java.lang.String"/>
+	<field name="approvaltestanalysisform_testAnalysisFormNumber" class="java.lang.String"/>
+	<field name="approvaltestanalysisform_emailadvosor" class="java.lang.String"/>
+	<title>
+		<band height="747" splitType="Stretch">
+			<staticText>
+				<reportElement x="158" y="38" width="218" height="24" uuid="e6bbf9f9-5bb1-467b-834d-2f68b3f91e5c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ศูนย์บริการวิชาการด้านวิทยาศาสตร์และเทคโนโลยี
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="13" width="218" height="24" uuid="91d29bcc-524d-4b88-91c8-436c866b0667"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[แบบฟอร์มการขอใช้บริการวิเคราะห์ทดสอบ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="392" y="12" width="152" height="85" uuid="6b2b2ee9-1e7d-4ff0-a8d1-34a9fe9a55a3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="387" y="11" width="163" height="24" uuid="12e708c1-c2d5-44dd-9e14-ab0363f34c54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[สําหรับเจ้าหน้าที่ของศูนย์บริการวิชาการฯ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="35" width="163" height="16" uuid="710c155a-3a1d-4dd5-b470-789601d85298"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ใบเลขที่คําขอ ...................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="76" width="163" height="16" uuid="41dc1f06-205d-43c8-9eec-dbb77ddc2e85"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[วันที่รับ ...................................]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="444" y="31" width="100" height="20" uuid="94de545b-b6dc-4cc4-828a-34b95df9dfcd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="426" y="72" width="127" height="20" uuid="78488276-62b6-4b58-b8da-f1cd2c27fcd9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_pickupdate} != null ?
+new java.text.SimpleDateFormat("dd MMMM yyyy" , new Locale("th","TH"))
+.format($F{testanalysisform_pickupdate})
+: ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="377" width="164" height="23" uuid="8b7be0cb-097e-4dd8-af25-266a8a035068"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[รายการวิเคราะห์ทดสอบที่ขอใช้บริการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="401" width="39" height="39" uuid="1d124960-b5c2-4f97-8c18-ffe0c9f47321"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[รหัส (Code)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="401" width="84" height="39" uuid="690ff6b7-de8a-4235-baff-77ace1905e29"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ชื่อตัวอย่าง (Sample name)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="401" width="30" height="39" uuid="ea337a58-0349-42df-b91c-6aa2313d33f7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[นํ้าหนัก/ปริมาตร]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="401" width="36" height="39" uuid="dda8eb0a-f1d3-4400-893c-295f188e9a83"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[จํานวน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="401" width="32" height="39" uuid="4013f595-3f30-4b71-b764-ab8c0f964eef"/>
+				<box leftPadding="2">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ข้อที่**]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="401" width="108" height="39" uuid="67e65f40-ec9d-48c1-8936-43bd79376be2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[รายละเอียดที่ขอรับบริการ (Test Item)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="401" width="69" height="39" uuid="2ae6b524-c7b2-4800-8f2f-1cd58c1f9b4f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[หมายเลขปฎิบัติการ (สําหรับเจ้าหน้าที่)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="401" width="58" height="39" uuid="46d37707-7e4b-4515-a2ec-f03d4dd50b7a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[การเก็บรักษา (อุณหภูมิ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Transparent" x="403" y="465" width="152" height="22" uuid="ce039785-7f8e-4dec-ac62-eef18c6bb81c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<text><![CDATA[**สําหรับเจ้าหน้าที่กรอก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="63" width="218" height="24" uuid="ce36acde-7071-4ac9-bbff-c27f0ba2c5a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[คณะวิทยาศาสตร์ มหาวิทยาลัยแม่โจ้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="56" width="163" height="16" uuid="7d2503a2-b533-45f1-827b-46dbde49f3fb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ประเภท...............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="19" y="118" width="524" height="42" uuid="8126a131-a8f7-4040-95fd-da4960f85904"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="24" y="119" width="140" height="22" uuid="48a25c45-fb0f-40da-9ce9-9a5aec4a6880"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ต้องการออกผลทดสอบเป็นภาษา]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="147" y="120" width="27" height="20" uuid="65cdc6cb-a20a-487a-af87-f5a8f0b18f56"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_language} != null &&
+$F{testanalysisform_language}.equals("ไทย")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="19" y="13" width="110" height="105" uuid="4e6c6412-3c46-48ee-be72-fb2ff2bbfed7"/>
+				<imageExpression><![CDATA[$P{image_path}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="160" y="119" width="43" height="22" uuid="79a7b140-a7d9-497d-b4dc-3f782ad02a8f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ไทย/Thai]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="205" y="121" width="27" height="20" uuid="b3d65c28-08a3-4bc2-a6f4-2e1b596ffdad"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_language} != null &&
+$F{testanalysisform_language}.equals("อังกฤษ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="218" y="119" width="64" height="22" uuid="a198b712-f655-4055-9cca-9cafe72571b2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[อังกฤษ/English]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="282" y="120" width="27" height="20" uuid="d6ed967f-67d0-4f12-9e0f-abcf118594d7"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_language} != null &&
+$F{testanalysisform_language}.equals("ทั้งสองภาษา")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="294" y="119" width="249" height="22" uuid="87f838b3-1d6a-474a-b1c0-cb9355e83be9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ทั้งสองภาษา (คิดค่าบริการออกผลเพิ่มตัวอย่างละ100บาท)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="24" y="138" width="519" height="22" uuid="abf2a934-1b76-480c-928d-fd2530b62910"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[หากต้องการออกผลเป็นภาษาอังกฤษ กรุณาเขียนชื่อ-ที่อยู่ที่ใช้ในการออกผลทดสอบ/Report Address เป็นภาษาอังกฤษ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="19" y="160" width="275" height="100" uuid="9635bf82-dc88-4f22-9f23-a4256aa525e7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="294" y="160" width="249" height="100" uuid="f7d7b1fe-72ad-4a29-90da-661d13e810f5"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="26" y="160" width="101" height="22" uuid="7c404716-622f-4005-866b-88e3a5453e23"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[นามลูกค้า/Client name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="26" y="206" width="57" height="22" uuid="3de599a8-2067-4441-bb5a-231698de9ea6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ที่อยู่/Address:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="297" y="162" width="287" height="22" uuid="715f3372-c49a-4d6b-885e-d7a14c7cb096"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ชื่อ-ที่อยู่ที่ใช้ในการออกผลทดสอบ/Report Address:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="19" y="260" width="524" height="60" uuid="f0e06d20-f7cf-4286-b95e-e72e0db4c578"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="27" y="260" width="145" height="22" uuid="e2f8cc37-f071-401d-ae81-5ff315573a9e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ชื่อ-สกุล ผู้ติดต่อ/Client contract :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="295" y="260" width="145" height="22" uuid="943d9db7-6a2a-4cff-826b-14f4a9ff8254"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ตําแหน่ง/Position:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="28" y="298" width="145" height="22" uuid="88f1375e-a6e0-4f9e-92e6-f361e9390ddc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[โทรศัพท์/Phone no. :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="240" y="298" width="83" height="22" uuid="ece2547a-426c-4ac2-939f-490262ba8685"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[โทรสาร/Fax no. :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="376" y="298" width="29" height="22" uuid="08fdb0d8-9c9d-44bc-895f-2f4a3436cee3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[E-mail:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="19" y="320" width="524" height="56" uuid="4e74fa98-631d-4cc2-9889-d348e83e268a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="28" y="320" width="287" height="22" uuid="46724f32-6067-465f-a8bf-101e0135d8dd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ชื่อที่อยู่ที่ใช้ในการออกใบเสร็จรับเงิน/Billing Address :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="376" width="164" height="23" uuid="e857966d-9cde-45e6-83c0-c53414e5358b"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[(กรณีไม่เพียงพอให้ใช้ใบแนบ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="401" width="58" height="39" uuid="18f95a6d-d07f-4356-86fd-3ae52a6f8692"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ค่าบํารุง (บาท)**]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Transparent" x="19" y="487" width="773" height="25" uuid="3851f473-b1fc-426c-8d48-da462b21ac46"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<text><![CDATA[ลักษณะบรรจุ .................................................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="20" y="512" width="144" height="20" uuid="932503d2-49ad-4d19-bbbe-7433c6af0b22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[รายละเอียดการขอรับบริการเพิ่มเติม]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="158" y="512" width="27" height="20" uuid="23bd80ae-6a9e-4e47-851d-7dad8aca6598"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_additional_details} != null
+&& $F{testanalysisform_additional_details}.equals("Uncertainty")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="174" y="512" width="56" height="20" uuid="b6e9e82a-4769-46f2-8523-d1118f3939a6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Uncertainty]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="230" y="512" width="27" height="20" uuid="9ffac7b7-cb6c-4a67-9603-fbec915ac061"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_additional_details} != null
+&& $F{testanalysisform_additional_details}.equals("LOD")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="244" y="512" width="24" height="20" uuid="f14a70bf-bd80-47e1-b500-65ae1e0af455"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[LOD]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="268" y="512" width="27" height="20" uuid="50c3847c-031f-485f-bdca-af96d0b2176a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_additional_details} != null
+&& $F{testanalysisform_additional_details}.equals("LOQ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="281" y="512" width="24" height="20" uuid="bdc63bda-f5ff-41b0-b825-b927d39c8549"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[LOQ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="305" y="512" width="27" height="20" uuid="38067822-2571-4bd6-9eeb-081b3b4301c4"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_additional_details} != null
+&& $F{testanalysisform_additional_details}.equals("MRL")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="322" y="512" width="24" height="20" uuid="f680f1bd-2ec9-4faa-b1eb-f6067b4db8bf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[MRL]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="346" y="512" width="27" height="20" uuid="a8e2f6ea-e3d4-419d-985d-6cf691c5aa5f"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_additional_details} != null
+&& $F{testanalysisform_additional_details}.equals("DL")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="360" y="512" width="24" height="20" uuid="6a3be11c-5fd6-49db-a22f-16bec60fc508"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DL]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="378" y="512" width="27" height="20" uuid="8fbabcb7-f3d8-4f6c-b061-5855af5b9935"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_additional_details} != null
+&& !$F{testanalysisform_additional_details}.equals("Uncertainty")
+&& !$F{testanalysisform_additional_details}.equals("LOD")
+&& !$F{testanalysisform_additional_details}.equals("LOQ")
+&& !$F{testanalysisform_additional_details}.equals("MRL")
+&& !$F{testanalysisform_additional_details}.equals("DL")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="392" y="512" width="224" height="20" uuid="d4e3311f-f667-4fe8-b3c4-23b3561948d5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ระบุหน่วยเป็น...............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="20" y="532" width="539" height="20" uuid="422d6160-86c8-42c3-b379-80f24be4f929"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[........................................................................................................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="19" y="552" width="98" height="20" uuid="0778d9b1-115b-4395-937e-6ede63f2ba95"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ตัวอย่างที่นํามาขอบริการ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="117" y="552" width="27" height="20" uuid="5e64a8c0-9108-487c-a8af-ec04fbf47bd8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_receive_Analysis_Result} != null
+&& $F{testanalysisform_receive_Analysis_Result}.equals("ไม่ขอรับคืน")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="303" y="552" width="27" height="20" uuid="ec5bde5b-295a-4fa1-abb6-9d45bfcf1400"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_receive_Analysis_Result} != null
+&& $F{testanalysisform_receive_Analysis_Result}.equals("ส่งให้ทางไปรษณีย์")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="129" y="552" width="45" height="20" uuid="86554a12-cf7c-4fa1-b6be-59500545c7f9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ไม่ขอรับคืน]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="176" y="552" width="27" height="20" uuid="0ceb22f6-5ab1-4e88-93ec-c71370e029f3"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_receive_Analysis_Result} != null
+&& $F{testanalysisform_receive_Analysis_Result}.equals("ขอรับคืนโดยมารับด้วยตนเอง")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="189" y="552" width="116" height="20" uuid="e723208f-8d53-4bf3-bfa8-95fa6aae52f0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ขอรับคืนโดยมารับด้วยตนเอง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="315" y="552" width="314" height="20" uuid="dd77b5f4-4dcb-43f1-b539-b98d13624eba"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ส่งให้ทางไปรษณีย์ (คิดค่าบริการเพิ่มตัวอย่างละ 100 บาท)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="20" y="572" width="63" height="20" uuid="b57282f5-3f6c-4e34-aaec-8a8617345c68"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ผลการทดสอบ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="90" y="572" width="27" height="20" uuid="6d73515b-b373-4842-8958-cfc1803486dc"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_resultsOfTheAnalysis} != null
+&& $F{testanalysisform_resultsOfTheAnalysis}.equals("มารับด้วยตนเอง")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="103" y="572" width="73" height="20" uuid="3ca5df16-8276-403c-875a-654749255e54"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[มารับด้วยตนเอง]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="193" y="572" width="27" height="20" uuid="d567e166-ab78-4734-bd37-1dd4ecc164e4"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_resultsOfTheAnalysis} != null
+&& $F{testanalysisform_resultsOfTheAnalysis}.equals("ส่งให้ทางไปรษณีย์")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="212" y="572" width="298" height="20" uuid="b42244aa-3f92-4739-a72b-22598c5be20c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ส่งให้ทางไปรษณีย์ EMS (คิดค่าบริการเพิ่มตัวอย่างละ100บาท)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="52" y="602" width="330" height="20" uuid="c9aa1853-2ce6-42a5-be0a-a3b4a8a782e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="true" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[การรายงานผลทดสอบจะไม่มีบริการด้านการให้ความเห็นและการแปลผล
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="418" y="592" width="117" height="47" uuid="bc24d4ae-99ee-4d0e-aa4c-dc8b3637b760"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="419" y="592" width="116" height="20" uuid="7d8776e4-2542-4bf2-b04b-772d7158bbd1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[กําหนดรับผลการทดสอบ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="418" y="619" width="116" height="20" uuid="70398e63-2869-4a0e-a2d8-b0617632c724"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[...................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="652" width="554" height="20" uuid="09dabcb2-1e58-4afb-8c0c-80b0b7a1b63f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[หากท่านมีความต้องการพิเศษเกี่ยวกับการวิเคราะห์หรือการเตรียมตัวอย่างหรืออื่น ๆ โปรดระบุในช่องรายละเอียดที่ขอรับบริการหรือแจ้งกับเจ้าหน้าที่บริการลูกค้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="672" width="554" height="20" uuid="07b85962-0282-471f-876c-4318f408195e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[If you have special requirement associated with the sample analysis or preparation or any requirement.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="692" width="554" height="20" uuid="dcfa2df0-4206-4b24-afc3-83686aa2faf3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Please specify clearly intended in Test item of inform customer service officer.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="431" y="51" width="100" height="20" uuid="94d1b7ca-ccad-47b2-999b-badd22a3d3f6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="114" y="162" width="127" height="20" uuid="cbc3d9cc-e33f-4451-b5fa-63a82bb40ec3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_client_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="78" y="210" width="205" height="52" uuid="eb7bb475-cde2-4c7d-9931-dfe35643c5c3"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="297" y="182" width="237" height="78" uuid="10057a5e-94ac-4e9f-9537-5055362a8875"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_report_Address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="215" y="322" width="237" height="20" uuid="db524cc4-42fe-479c-b207-a9b28798ba68"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_billing_Address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="76" y="487" width="343" height="25" uuid="1ca230e4-09f2-4075-aa24-c91aa6c5228d"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_packing_style}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="19" y="440" width="516" height="25" uuid="09d24b3c-0aaa-4d8c-8931-96de16d82bd8"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset1" uuid="7d609bfd-f1e6-4064-a289-7f55a6750c58">
+						<datasetParameter name="testAnalysisFrom">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="25" width="516">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="84" height="25" uuid="775b2fd4-eb32-452f-9b2d-10ea8efeddf6"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usetestitem_sampleName}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="84" y="0" width="39" height="25" uuid="fc1728b3-6615-4143-a737-280e722b1e64"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usetestitem_code}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="123" y="0" width="30" height="25" uuid="d5844f94-a481-4371-99e2-68af50385b60"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usetestitem_weight}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="153" y="0" width="36" height="25" uuid="9d41ba2a-2cec-4ec3-8023-c639b85f744a"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usetestitem_qty}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="329" y="0" width="69" height="25" uuid="cdb9aac6-8992-4016-af42-594148bfe7f6"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usetestitem_number_Operating}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="398" y="0" width="58" height="25" uuid="d32cb81d-189f-45bb-b855-71cde573f8a3"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usetestitem_storage}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="456" y="0" width="58" height="25" uuid="4d24dc32-5ec3-4356-8c88-ba6dc79d42ff"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{usetestitem_maintenancefee} != null ?
+new java.text.DecimalFormat("0.00")
+.format($F{usetestitem_maintenancefee})
+: ""]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="189" y="0" width="32" height="25" uuid="f6e0447a-eef4-4c87-8edd-36dea63c976c"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="RelativeToTallestObject" x="221" y="0" width="108" height="25" uuid="c9587544-4b50-455d-a9cd-2e3aa6fe6c1d"/>
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{testitem_testitem_Name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="153" y="262" width="140" height="20" uuid="5507e34b-0945-40ad-a169-b80928bff9bd"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{testanalysisform_studentID} != null
+    ? $F{student_nameTh} + " " + $F{student_surnameTh}
+    : $F{testanalysisform_member_ID} != null
+    ? $F{member_member_Prefix}+""+$F{member_member_FirstName}+" "+$F{member_member_LastName}
+    : $F{testanalysisform_personnel_ID} != null
+    ? $F{personnel_personnel_Prefix}+""
+    +$F{personnel_personnel_FirstName}+" "+$F{personnel_personnel_LastName}
+    : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="369" y="262" width="140" height="20" uuid="e0ef0048-ec4a-4221-bab5-31e9e0e35be9"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{testanalysisform_studentID} != null
+    ? "นักศึกษา"
+    : $F{testanalysisform_member_ID} != null
+    ? $F{member_position}
+    : $F{testanalysisform_personnel_ID} != null
+    ? $F{personnel_position}
+    : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="109" y="298" width="140" height="20" uuid="bd17c1c5-09c2-4757-95dd-21a344793b1c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{testanalysisform_studentID} != null
+    ? $F{student_phonenumber}
+    : $F{testanalysisform_member_ID} != null
+    ? $F{member_phonenumber}
+    : $F{testanalysisform_personnel_ID} != null
+    ? ""
+    : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="403" y="298" width="140" height="22" uuid="cd6dc01a-de1a-4baa-a266-708c2ae9d08e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{testanalysisform_studentID} != null
+    ? $F{student_email}
+    : $F{testanalysisform_member_ID} != null
+    ? $F{member_email}
+    : $F{testanalysisform_personnel_ID} != null
+    ? $F{personnel_email}
+    : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="27" y="532" width="485" height="20" uuid="912a30c4-0fbe-4ff5-8cf3-0bef94293c63"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_additional_details} != null
+&& !$F{testanalysisform_additional_details}.equals("Uncertainty")
+&& !$F{testanalysisform_additional_details}.equals("LOD")
+&& !$F{testanalysisform_additional_details}.equals("LOQ")
+&& !$F{testanalysisform_additional_details}.equals("MRL")
+&& !$F{testanalysisform_additional_details}.equals("DL")
+? $F{testanalysisform_additional_details} : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="802">
+			<staticText>
+				<reportElement x="111" y="83" width="671" height="26" uuid="4c67fd7b-d7e3-4a20-920c-2c7fe33f0d42"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<text><![CDATA[ ในนาม    .....................................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="109" width="413" height="26" uuid="822ae6ab-c743-4cae-9e78-03ac04ca679b"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<text><![CDATA[.....................................................................................................................................................]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="7" y="140" width="260" height="143" uuid="57f5ec7d-f18d-4431-a0fa-c76a421a0cc4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="11" y="143" width="97" height="19" uuid="d9e5635a-1c3e-40ad-9de8-0e03743e23a9"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[สําหรับผู้ขอใช้บริการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="224" width="260" height="21" uuid="3f4628c0-219d-4419-b6be-cd0115505687"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[ลงชื่อ...............................................................ผู้ขอใช้บริการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="246" width="260" height="21" uuid="5042adb4-8c52-47a7-bbc8-60fdcb5f73ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[(...............................................................)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="262" width="260" height="21" uuid="14b2de91-5944-45f9-b777-5a1394979a9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[....................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="293" width="458" height="20" uuid="7cef37ee-fef8-4a60-957f-4e813d60c882"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ส่วนที่ 3: สําหรับห้องปฏิบัติการ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="33" y="23" width="28" height="20" uuid="5022600e-53bf-4b97-b7d3-ba143e63f3c7"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{payment_payment_type} != null &&
+$F{payment_payment_type}.equals("ชำระเงินสด"))
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="46" y="23" width="466" height="20" uuid="299d5880-886e-4694-88dc-a50c8c2514ce"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ชําระเงินสด (ติดต่อที่ งานคลังและพัสดุ คณะวิทยาศาสตร์ ชั้น 1 อาคารจุฬาภรณ์ ในวัน - เวลาราชการ)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="33" y="43" width="27" height="20" uuid="9fa2748f-3efe-4360-8ff9-1a64f22df5b2"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment_payment_type} != null &&
+$F{payment_payment_type}.equals("ชําระเงินผ่านบัญชี")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="46" y="43" width="466" height="20" uuid="90d4fb26-ded5-4326-ad5b-18a7d597b533"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ชําระเงินผ่านบัญชี ธนาคารกรุงเทพ สาขามหาวิทยาลัยแม่โจ้ ชื่อบัญชี มหาวิทยาลัยแม่โจ้ เลขที่บัญชี678 - 004800 - 2]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="33" y="63" width="27" height="20" uuid="b2462a0e-be82-45df-bfe4-072e662ee1cf"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment_payment_type} != null &&
+$F{payment_payment_type}.equals("เบิกจ่ายผ่านหน่วยงาน")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="46" y="63" width="506" height="20" uuid="b38a7203-9afa-43f6-8eea-699e62373546"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[เบิกจ่ายผ่านหน่วยงาน (เฉพาะหน่วยงานภายในมหาวิทยาลัยแม่โจ้......................................................................................................)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="45" y="372" width="254" height="20" uuid="f3b8a38e-68cc-427d-a835-f25896c018bb"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ค่าใช้จ่ายเพิ่มเติม จํานวน...........รายการ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="328" y="372" width="181" height="20" uuid="7003a3cd-bbc6-4ef4-9172-bc53fd928003"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[………………………………………..บาท]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="496" width="191" height="20" uuid="4d18cca4-7b38-46a0-b9ad-5306b83a9998"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ความเห็นหัวหน้างานบริการวิชาการและวิจัย]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="13" y="573" width="332" height="20" uuid="c26749b3-335c-4a48-8253-7421b63eae42"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ความเห็นของรองคณะบดีฯ ฝ่ายวิจัยและบริการวิชาการ หรือผู้ที่ได้รับมอบหมาย]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="83" width="103" height="26" uuid="f556f9ac-9f73-45ce-a16b-a7f83410cb10"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[การออกใบเสร็จรับเงิน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="660" width="458" height="20" uuid="c239cf0b-cc31-4211-9d08-6060032b94ab"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ส่วนที่ 4: สําหรับงานคลังและพัสดุ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="12" y="678" width="27" height="20" uuid="bcc9f052-0b27-4752-8258-1faf202de873"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{payment_status} != null
+&& $F{payment_status}.equals("ได้รับค่าบํารุงเรียบร้อย"))
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="26" y="678" width="573" height="20" uuid="565f05bf-862e-479d-b20c-f446af65a4c8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ได้รับค่าบํารุงการใช้บริการเรียบร้อยแล้ว ตามใบเสร็จรับเงิน เลขที่....................................... วันที่ ........................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="12" y="698" width="27" height="20" uuid="2bdc1fbe-8dae-4910-a922-b93ac85330b3"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{payment_status} != null
+&& $F{payment_status}.equals("ตรวจสอบการโอนเงินเรียบร้อย"))
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="25" y="698" width="573" height="20" uuid="2993f5b9-3e9d-47c5-a07a-a59d1bcaf511"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ได้ตรวจสอบเอกสารการโอนเงินเรียบร้อยแล้ว (ชําระผ่านบัญชีธนาคาร เมื่อวันที่ ........................................... เวลา.......................น.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="25" y="718" width="338" height="20" uuid="b9033362-fef6-4b85-bb0a-01c2fd4f7f2b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ตามใบเสร็จรับเงิน เลขที่....................................... วันที่ ........................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="12" y="738" width="27" height="20" uuid="74b0f291-4d3e-475e-8802-7208f5311395"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{payment_status} != null
+&& $F{payment_status}.equals("ได้ตรวจสอบเอกสารเบิกจ่ายผ่านหน่วยงานเรียบร้อย"))
+? "\u2611" : "\u2610"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="25" y="738" width="671" height="20" uuid="9b404e39-a0c9-4653-96c3-1d3772de873e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ได้ตรวจสอบเอกสารเบิกจ่ายผ่านหน่วยงาน (เฉพาะมหาวิทยาลัยแม่โจ้) เลขที่....................................... วันที่ .......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="63" y="773" width="212" height="20" uuid="69dc9a52-def0-4f52-86e6-fa888367237d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[เก็บใน R – 001]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="23" y="773" width="53" height="20" uuid="564c6efe-4b7b-42ed-96be-f6716487fbd3"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[หมายเหตุ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="163" width="243" height="51" uuid="07a45c72-f4ef-45c8-be1a-44bbf2a04e54"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<text><![CDATA[     ข้าพเจ้ายินดีปฏิบัติตามระเบียบและคาแนะนําของเจ้าหน้าที่ผู้ดูแล อย่างเคร่งครัด]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="46" y="412" width="398" height="20" uuid="3c4f4427-7060-4c16-b16c-70884d8a4314"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[กําหนดชําระค่าบํารุงการใช้บริการวิเคราะห์ทดสอบภายในวันที่...........................................................]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="83" width="334" height="52" uuid="eba6a44d-0f2c-4352-b210-5716aee01f17"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH Sarabun New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment_receipts_on_behalf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="3" width="458" height="20" uuid="ae5f5367-8eec-4585-8780-3cc701b2ddd2"/>
+				<textElement>
+					<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ส่วนที่ 2 : การชําระเงินค่าบํารุงการใช้บริการเครื่องมือวิทยาศาสตร์]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="72" y="245" width="128" height="20" uuid="a966cf57-0501-4ce8-b7c2-60d67fefaa84"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{testanalysisform_studentID} != null
+    ? $F{student_nameTh} + " " + $F{student_surnameTh}
+    : $F{testanalysisform_member_ID} != null
+    ? $F{member_member_Prefix}+""+$F{member_member_FirstName}+" "+$F{member_member_LastName}
+    : $F{testanalysisform_personnel_ID} != null
+    ? $F{personnel_personnel_Prefix}+""
+    +$F{personnel_personnel_FirstName}+" "+$F{personnel_personnel_LastName}
+    : "")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="72" y="261" width="128" height="20" uuid="c26e40aa-19d5-4a10-87ec-175ffa6c9035"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH Sarabun New" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{testanalysisform_createdate} != null ?
+new java.text.SimpleDateFormat("dd/MM/yyyy" , new Locale("th","TH")).format(
+    $F{testanalysisform_createdate})
+: ""]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement positionType="Float" x="275" y="140" width="275" height="143" uuid="63f5939b-1c65-414c-981b-319c793e1d87"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approveNo1" uuid="4c846750-55c8-4dbb-9f6e-fccc4d14c776">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="143" width="275">
+						<staticText>
+							<reportElement x="25" y="42" width="246" height="20" uuid="70e27443-6a48-45dc-b99a-9a612f4fa803"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="10" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[ไม่เห็นควรให้ส่งตัวอย่างทดสอบ เนื่องจาก.........................................................]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="7" y="4" width="193" height="19" uuid="f696f78f-3242-4886-84f8-ba9878466ccf"/>
+							<textElement>
+								<font fontName="TH Sarabun New" size="14" isBold="true" isUnderline="true"/>
+							</textElement>
+							<text><![CDATA[สําหรับอาจารย์ที่ปรึกษา/หัวหน้าโครงการ]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="3" y="62" width="268" height="43" uuid="4791e23b-a91a-42ed-94e9-e896924e369c"/>
+							<textElement>
+								<font fontName="TH Sarabun New" size="10"/>
+							</textElement>
+							<text><![CDATA[         ทั้งนี้ข้าพเจ้ายินดีรับผิดชอบ ค่าบริการ หรือค่าใช้จ่ายเพิ่มเติมทั้งหมดอันเกิดจาก การใช้บริการของนักศึกษา/ผู้ช่วยวิจัย ในห้องปฏิบัติการ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="10" y="42" width="27" height="20" uuid="df21907a-c6cc-4d0c-8154-40c981a1f88f"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="0" y="122" width="274" height="21" uuid="011ca33b-4348-4e16-94b4-ce3b1fb36788"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<text><![CDATA[....................................................................]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="10" y="22" width="27" height="20" uuid="a25d5bf1-f515-4dc9-93a2-575d8c2d4fc3"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="25" y="23" width="169" height="20" uuid="cfa36996-8984-4923-9101-afba85058a13"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="10" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[เห็นควรให้ส่งตัวอย่างทดสอบได้]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="86" width="274" height="21" uuid="db7daa87-d0b0-47bc-b647-d676de6c4c4b"/>
+							<textElement textAlignment="Center" verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<text><![CDATA[ลงชื่อ................................................................อาจารย์ที่ปรึกษา/หัวหน้าโครงการ]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="107" width="270" height="21" uuid="cafebe60-6b2e-4635-9676-18396452978c"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<text><![CDATA[(...............................................................)]]></text>
+						</staticText>
+						<rectangle>
+							<reportElement mode="Transparent" x="1" y="0" width="273" height="143" uuid="e35eec47-9b5b-41a2-9e9f-33f290552c3f"/>
+						</rectangle>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="144" y="42" width="124" height="20" uuid="e1e46921-9022-4e1b-a16d-943a623725c7"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? $F{approvaltestanalysisform_reason} : ""]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="71" y="119" width="129" height="18" uuid="7843ae0f-89bb-44fb-bf85-87c27ca6435f"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_date_approve} != null
+? new java.text.SimpleDateFormat("dd/MM/yyyy" , new Locale("en","EN")).format(
+    $F{approvaltestanalysisform_date_approve})
+: ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="11" y="313" width="544" height="39" uuid="96ef483d-7dee-4980-ad00-37b286c7079b"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve2_approve" uuid="a91e09e5-edec-48b5-b99f-2addc3b10486">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="39" width="544">
+						<textField>
+							<reportElement x="2" y="0" width="27" height="20" uuid="0bb6bc6b-051e-4d0c-9d58-aa1342f23d13"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="16" y="0" width="517" height="20" uuid="77eb977a-d6bd-489e-af2f-00c21a926f96"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[ไม่สามารถให้บริการได้ เนื่องจาก ............................................................................................................................................................]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="2" y="19" width="27" height="20" uuid="c99ac731-5dbd-42b5-aa04-3b64b0792810"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="16" y="19" width="509" height="20" uuid="31cf08f1-25ac-4ff7-bcfd-9901fdf3ff56"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[สามารถให้บริการได้ โดยมีค่า ใช้จ่ายในการบริการวิเคราะห์ทดสอบ ดังนี้]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="142" y="0" width="390" height="20" uuid="796cf608-7a05-4c30-b26f-5b48a4457da2"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? $F{approvaltestanalysisform_reason} : ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="45" y="352" width="464" height="20" uuid="9781e910-a593-4497-9135-bf70750b83d6"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="maintenanceFee" uuid="9379f877-3d45-49b3-95ef-ddd83a47796b">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="464">
+						<staticText>
+							<reportElement x="283" y="0" width="181" height="20" uuid="648e3c2a-2f2c-43cc-8a2b-7826f023bce6"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[………………………………………..บาท]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="0" width="254" height="20" uuid="9d7d9bc7-1c4f-49aa-831e-05165c8d974a"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[ค่าบํารุงการใช้บริการวิเคราะห์ทดสอบ จํานวน..........รายการ]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="169" y="0" width="26" height="20" uuid="00c8facd-92af-4279-b20d-fa7e12a5364d"/>
+							<textElement textAlignment="Center">
+								<font fontName="TH Sarabun New" size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{maintainance_fee_count}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="283" y="0" width="103" height="20" uuid="53f51fda-5d9a-4e8e-b54d-7ef7069113ac"/>
+							<textElement textAlignment="Center">
+								<font fontName="TH Sarabun New" size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{maintainance_fee} != null && $F{maintainance_fee} > 0.0
+? new java.text.DecimalFormat("0.00").format(
+    $F{maintainance_fee})
+: "0.00"]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="46" y="392" width="463" height="20" uuid="8a869cfa-f22e-4e89-a44a-7660515d464b"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="summary_price" uuid="e2aee3b4-1a20-41e7-b9ee-69af4200e921">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="463">
+						<staticText>
+							<reportElement x="282" y="0" width="181" height="20" uuid="edb7e86b-3252-4cd9-9928-3d9d3928931b"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[………………………………………..บาท]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="0" y="0" width="398" height="20" uuid="1a75523b-1de9-48fd-ae5a-4d746f234105"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[รวมค่าใช้จ่าย (ตัวอักษร.........................................................................................)]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="282" y="0" width="103" height="20" uuid="827d3f61-2347-4980-a114-bc49e7d67348"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{maintainance_fee} != null && $F{maintainance_fee} > 0.0
+? new java.text.DecimalFormat("0.00").format(
+    $F{maintainance_fee})
+: "0.00"]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="44" y="434" width="288" height="62" uuid="4b736fd1-4e6c-4913-b4fb-0c1051012841"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve2_person" uuid="5640efdb-0353-46ae-baa6-8f38784780e7">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="62" width="288">
+						<staticText>
+							<reportElement x="0" y="20" width="250" height="20" uuid="bebc5b82-ab86-4b93-baea-800c53c0bba9"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[…………….........................…………………………เจ้าหน้าที่ห้องปฎิบัติการ]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="40" width="282" height="20" uuid="3dbeae9e-867a-4501-85b8-6efa8804ffe4"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[(.......................................................................) ............................................]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="2" y="40" width="143" height="20" uuid="76eee6e9-4deb-4531-a829-46a083d8a3b1"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{personnel_name}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+							<reportElement x="149" y="41" width="90" height="18" uuid="1b752644-4fc7-4a69-a544-c22bcb8fb3ef"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_date_approve} != null
+? new java.text.SimpleDateFormat("dd/MM/yyyy" , new Locale("en","EN")).format(
+    $F{approvaltestanalysisform_date_approve})
+: ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="309" y="434" width="224" height="62" uuid="01e65611-a9c5-4775-93e3-1b678fad0766"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve3_person" uuid="02d5b4a3-9847-45e3-80ca-2af62bff9034">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="62" width="224">
+						<staticText>
+							<reportElement x="44" y="40" width="111" height="20" uuid="c4c40807-5672-4c7f-b95d-1c0412673fd4"/>
+							<textElement textAlignment="Center" verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[......................................]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="17" y="20" width="206" height="20" uuid="8c64d9a7-8567-4919-a667-e7bc84ef258d"/>
+							<textElement textAlignment="Center" verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[…………………………………………… ประธานหลักสูตร]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="78" y="0" width="38" height="20" uuid="572e139f-cf7d-499b-97cc-4206b101a645"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[รับทราบ]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="39" y="21" width="104" height="20" uuid="f9b1b657-d373-493b-9aef-697dbbbab354"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{personnel_name}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="44" y="42" width="111" height="18" uuid="4f03dc44-e460-47a3-b6c7-670bbba43385"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_date_approve} != null
+? new java.text.SimpleDateFormat("dd/MM/yyyy" , new Locale("th","TH")).format(
+    $F{approvaltestanalysisform_date_approve})
+: ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="39" y="515" width="520" height="20" uuid="a6b3ffbe-d031-4d20-ae3d-d1faf81a7eee"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve4_approve" uuid="2bc1efc1-cb59-4865-bb6d-6e4507e29b8e">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="520">
+						<staticText>
+							<reportElement x="179" y="0" width="338" height="20" uuid="6b24efab-86f6-42e9-aa16-0cc8d5a26202"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[ไม่เห็นควรให้ส่งตัวอย่างทดสอบ เนื่องจาก.........................................................]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="2" y="0" width="27" height="20" uuid="ffd6ffb1-0fc6-4ea3-adaa-4fd5c517cbd0"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="165" y="0" width="27" height="20" uuid="30c06ff8-ed4b-446e-af22-c81ab87015f9"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="15" y="0" width="157" height="20" uuid="737e1766-c7d7-45db-a5dd-8cb543e4fbf2"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[เห็นควรอนุญาตให้ส่งตัวอย่างทดสอบได้]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="337" y="0" width="179" height="20" uuid="91ebe8dc-f949-42aa-a4b5-bc3d1175a3b8"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? $F{approvaltestanalysisform_reason} : ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="257" y="535" width="299" height="37" uuid="9109a379-9420-494a-88f5-1ebcc3453e9b"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve4_person" uuid="af6b940d-1eb9-4649-b4c2-cc03aa96224d">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="37" width="299">
+						<staticText>
+							<reportElement x="8" y="1" width="288" height="20" uuid="116c62fe-d8a1-4f70-a5c2-0357e9730641"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[…………….........................…………………………หัวหน้างานบริการวิชาการและวิจัย]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="10" y="17" width="282" height="20" uuid="832fe569-ac5e-457e-bb6b-82a8117b98b8"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[(.......................................................................) .......................................................]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="11" y="15" width="137" height="18" uuid="e5db63cd-4baf-4e08-bab2-ddd31d5fb948"/>
+							<textElement textAlignment="Center" verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{personnel_name}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="160" y="17" width="111" height="18" uuid="f93d0838-b8b9-4a67-bc20-af7aed62aee8"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_date_approve} != null
+? new java.text.SimpleDateFormat("dd/MM/yyyy" , new Locale("en","EN")).format(
+    $F{approvaltestanalysisform_date_approve})
+: ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="41" y="593" width="516" height="20" uuid="a35dd079-57df-4d43-8f41-26c0b74a089d"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve5_approve" uuid="c1f10b9a-1ebf-49c8-9a7e-7c6512398dad">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="516">
+						<textField>
+							<reportElement x="2" y="0" width="27" height="20" uuid="cc6243f3-2c11-4264-a6cc-fe9b3ed5e14f"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="15" y="0" width="129" height="20" uuid="1f285682-01e6-4f86-b249-b8d34f17f5a9"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[อนุญาตให้ส่งตัวอย่างทดสอบได้]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="167" y="0" width="27" height="20" uuid="5a3f5662-553d-45cb-8228-ad02bef9e1ea"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Middle">
+								<font fontName="DejaVu Sans" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? "\u2611" : "\u2610"]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="183" y="0" width="332" height="20" uuid="3b519290-cf12-4ed0-9795-4f0b668b230e"/>
+							<textElement verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[ไม่อนุญาตให้ส่งตัวอย่างทดสอบ เนื่องจาก.....................................................................]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="339" y="0" width="163" height="20" uuid="6a22bb9b-eb82-404d-a3e1-5a3416345887"/>
+							<box>
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textElement verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_status} != null &&
+$F{approvaltestanalysisform_status}.equals("ไม่อนุมัติ")
+? $F{approvaltestanalysisform_reason} : ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="214" y="613" width="341" height="40" uuid="b996c81d-fda9-4580-ba44-ffd730b9efa2"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve5_person" uuid="8a955e33-4c38-4ad1-9b72-f18bcb2c49ff">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="40" width="341">
+						<staticText>
+							<reportElement x="4" y="20" width="282" height="20" uuid="603457fc-4631-4626-8e1d-41b6ee7738ce"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[(.......................................................................) .......................................]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="3" y="0" width="338" height="20" uuid="6fba554d-44b7-45aa-9331-ee7e1548015b"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[…………….........................…………………………รองคณบดีฯ ฝ่ายวิจัยและวิชาการ หรือผู้ที่ได้รับมอบหมาย]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="4" y="17" width="145" height="18" uuid="3f9912e9-0ac3-44c9-bdb6-a69d08766969"/>
+							<textElement textAlignment="Center" verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{personnel_name}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="150" y="19" width="80" height="18" uuid="d0da456e-9286-4a19-9463-820f73e68c44"/>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{approvaltestanalysisform_date_approve} != null
+? new java.text.SimpleDateFormat("dd/MM/yyyy" , new Locale("en","EN")).format(
+    $F{approvaltestanalysisform_date_approve})
+: ""]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="292" y="758" width="262" height="44" uuid="98d15a91-a6bc-4a51-a154-3c15fe5218d8"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="payment_person" uuid="ac2422b0-34d2-4719-9c79-d1b091042641">
+						<datasetParameter name="tafn">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_testAnalysisFormNumber}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="44" width="262">
+						<staticText>
+							<reportElement x="2" y="0" width="214" height="20" uuid="e5127102-133b-48ab-b983-5b0c51010268"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[..................................................................ผู้รับเงิน/ผู้ตรวจสอบ]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="1" y="20" width="257" height="20" uuid="560898f5-d406-4c1e-bfa4-b1ccb10cbd72"/>
+							<textElement verticalAlignment="Bottom">
+								<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+							</textElement>
+							<text><![CDATA[(.......................................................................) ......................................................]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="2" y="0" width="131" height="20" uuid="50e80366-43e9-4a17-8073-16b480cfb1df"/>
+							<textElement>
+								<font fontName="TH Sarabun New" size="14"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="387" y="434" width="38" height="20" uuid="f5ba3465-e22b-4729-947e-31922aba273c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[รับทราบ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="454" width="206" height="20" uuid="8315f24f-51e6-4546-8329-3c6398e74364"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[…………………………………………… ประธานหลักสูตร]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="474" width="111" height="20" uuid="b0bde450-0dc2-42c6-9beb-8a8ca5a8db07"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="12" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="151" y="370" width="13" height="20" uuid="d4f25f7b-ab48-4398-ab3c-d6b46222cee9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="328" y="370" width="103" height="20" uuid="3da2f25e-38d1-46a8-b13a-3b5cea7b10ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH Sarabun New" size="14" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[0.00]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement positionType="Float" x="275" y="245" width="274" height="50" uuid="dd9a12e2-dd53-4033-9521-15ddf793e072"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset2" uuid="73ada83e-1233-40ea-a4fc-8ecfae87e695">
+						<datasetParameter name="mem">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_member_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="274">
+						<textField>
+							<reportElement x="71" y="0" width="129" height="20" uuid="443acca7-21ed-4aed-b713-9ddbff46c620"/>
+							<textElement>
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{member_advisor_name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="274" y="233" width="275" height="50" uuid="359e1b1a-b432-4478-8125-39f202218faa"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="approve1_person" uuid="b3bc6ff0-d1d1-4fe6-aa92-4f38c6e5a504">
+						<datasetParameter name="mem_id">
+							<datasetParameterExpression><![CDATA[$F{testanalysisform_member_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="student_id">
+							<datasetParameterExpression><![CDATA[$F{student_studentID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="275">
+						<textField>
+							<reportElement x="70" y="9" width="131" height="20" uuid="0bf196e0-0a66-431b-bf17-77eed0cf4b8d"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="TH Sarabun New" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{student_advisor_name}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
